@@ -1,78 +1,25 @@
 language: cpp
-
 os:
-  - linux
-  - osx
-
+- linux
+- osx
 env:
-  - BUILD_TYPE=Debug LIBPACKAGER_TYPE=static_library
-  - BUILD_TYPE=Debug LIBPACKAGER_TYPE=shared_library
-  - BUILD_TYPE=Release LIBPACKAGER_TYPE=static_library
-  - BUILD_TYPE=Release LIBPACKAGER_TYPE=shared_library
-
-# before_install:
-#   - test -n $CC  && unset CC
-#   - test -n $CXX && unset CXX
-
-# install:
-#   - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git ../depot_tools/
-#   - export PATH="$PATH:$PWD/../depot_tools"
-
-# before_script:
-#   - mkdir src
-#   - shopt -s extglob dotglob
-#   - mv !(src) src
-#   - gclient config https://github.com/google/shaka-packager.git --name=src --unmanaged
-#   - export GYP_DEFINES="libpackager_type=${LIBPACKAGER_TYPE}"
-#   - gclient sync
-#   - cd src
-#   - ninja -C out/${BUILD_TYPE} -k 100
-
-# script:
-#   - if [ ${LIBPACKAGER_TYPE} == "shared_library" ] && [ ${TRAVIS_OS_NAME} == "osx" ]; then
-#       export DYLD_FALLBACK_LIBRARY_PATH=./out/${BUILD_TYPE};
-#     fi
-#   - ( find out/${BUILD_TYPE} -name "*_*test" | while read i ; do $i || exit ; done )
-#   - out/${BUILD_TYPE}/packager_test.py -v --libpackager_type=${LIBPACKAGER_TYPE}
-
+- BUILD_TYPE=Debug LIBPACKAGER_TYPE=static_library
+- BUILD_TYPE=Debug LIBPACKAGER_TYPE=shared_library
+- BUILD_TYPE=Release LIBPACKAGER_TYPE=static_library
+- BUILD_TYPE=Release LIBPACKAGER_TYPE=shared_library
 script:
-
-    - echo "abc" > 0.txt
-
+- echo "abc" > 0.txt
 before_deploy:
-  - echo "abc" > 0.txt
-  - rm -rf deploy
-  - mkdir deploy
-  - |
-    if [ ${LIBPACKAGER_TYPE} == "static_library" ] ; then
-      mv out/${BUILD_TYPE}/packager deploy/packager-${TRAVIS_OS_NAME}
-      mv out/${BUILD_TYPE}/mpd_generator deploy/mpd_generator-${TRAVIS_OS_NAME}
-      tar -zcf pssh-box.py.tar.gz -C out/${BUILD_TYPE} pyproto pssh-box.py
-      mv pssh-box.py.tar.gz deploy/pssh-box-${TRAVIS_OS_NAME}.py.tar.gz
-    fi
-  # https://docs.travis-ci.com/user/deployment/releases/#setting-the-tag-at-deployment-time
-  # Set up git user name and tag this commit
-  - git config --local user.name "fingul"
-  - git config --local user.email "fingul@gmail.com"
-  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-  - git tag $TRAVIS_TAG
+- echo "abc" > 0.txt
 deploy:
   provider: releases
-  api_key:
-    # https://docs.travis-ci.com/user/deployment/releases/#authenticating-with-an-oauth-token
-    # https://github.com/settings/tokens/new => with repo
-    # brew install travis
-    # travis encrypt [accress_token]
-    secure: FhMWawzQxjFUL/T6ftUA6QrnXqWiP40soKirvCGzs+TnEJHa2aFhW0kYr7GIxSRIPu8JXVu1Tnl+Zp22Cj+oVab+yQ4FvjVYNkSt1AQV/qECKgKJhL6cP0x80rEnFtuSXzq41SpC7zcSoq570/d0np9UTKk5coWEsaopcK3NPkgffyI/e29eDRNLpJl6wiVva2gB/DyvteRX2NToBZxzm4vAsD5XkpJClmnwsJu8tIY0tUkVVgWMtQvQiV7896FpYXWx1Vs8C1h/AOg73+c2XFxl7FhiUE6vxja6k49QvpvZTdpTRxiztDSJNo32joz5Cx+oC7lolz7A1iV2VlGTTfjQ57J9T+qXlzYiJ/OHEjOxlOaRQip3PNgN+lxeZVRVQgo7EVqIfhS5ImfrvM7h0p4nGQn+/SkyoniNrzhsKNvG6DtxN9DKx+NNtDJ7l9+hHM9Iv96KzPRGBadUHBhJfAFDgRFnqr2sF5BSsQ6Kep03XcOD61odPW1T7MkjW/g52vrDntOFEuPj8M6Zh623fkDnZM2yHi0s4g7EA2qM7ln6WqX61hl4CEiBkS/md3rqSYKwCIGqig2XGU6+xFEargKi/fud65c1sqZjWBdY6l92dpbzV5f3TiQMYDHyBxyArs8NZPkT+6OMYwRhkRlMGBgZ30WivQhNXVFDKag2GUY=
   file_glob: true
-  #file: deploy/*
   file: 0.txt
   skip_cleanup: true
-#   on:
-#     # tags: true
-#     condition: ${BUILD_TYPE} = Release && ${LIBPACKAGER_TYPE} == static_library
-
+  user: fingul@gmail.com
+  password:
+    secure: qOm0JaNijoDsZJ+lVH3e7zQND/cCIkbg4pEHd8rb2lV9XnopEW3iMxdYGHWrkwckr00jguxPbsSWuRAnO/5EPsPT3X012/RFtc6cj1SHK2G49AmDpkuYMiS3rgrsx5cEDEop7xfSQgJ88t157x/6KcQqYmE/PRQNbUjd+NnEtNDAJGnfYaPjM7sM7YtCmARmX3X+JdaGiJHKqIxm7VSU5TDjb2+FShE/webfug1tZfZnGI59By2rN7nb2rfip4hX8/RwqUrfYOVhs1zYL5OsrE1M6LiDK68zMrmtr5x6dKVWhkjOQjpaRYVteJV0VYoOMY2WGcEfelJDPD2xcyHvpMEhtZXTvBCj05wZnJVwCb9hulYV+4BSYIZ3246SNiW60VD5PpXR7UzA1ZqwpkttQSuaCZ9a7QcknOAijhm9afe6T4bzv1c08HCabikVr1W6k+hLf2V0bnVHAcZp7ADq9HIgJSqZo0wYo7MmfoE67L316Pju16Zj3DyJRHUQ7VXcR5CSYnOScUv7pjSIX7oqCk/HSaB5RBHCPDbvztHUV3Wy7Dqu/6o88OKzsOGGkSOy/sx1Q6yTroKWwuEdPCkAd068Pkq6BqTJWz/vglCWEzxCMXIVYD8dEQLEAa6Vb0qEGFWJ9ecrwmNhbSU02yvLA7R5J4NJnZX+GJGCjIEHXi0=
 branches:
   only:
-    - master
-    - "/^v\\d+\\./"
+  - master
+  - "/^v\\d+\\./"
