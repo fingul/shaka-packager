@@ -56,18 +56,18 @@ before_deploy:
   - git config --local user.email "fingul@gmail.com"
   - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
   - git tag $TRAVIS_TAG
-# deploy:
-#   provider: releases
-#   api_key:
-#     # https://docs.travis-ci.com/user/deployment/releases/#authenticating-with-an-oauth-token
-#     # https://github.com/settings/tokens/new => with repo
-#     # brew install travis
-#     # travis encrypt [accress_token]
-#     secure: FhMWawzQxjFUL/T6ftUA6QrnXqWiP40soKirvCGzs+TnEJHa2aFhW0kYr7GIxSRIPu8JXVu1Tnl+Zp22Cj+oVab+yQ4FvjVYNkSt1AQV/qECKgKJhL6cP0x80rEnFtuSXzq41SpC7zcSoq570/d0np9UTKk5coWEsaopcK3NPkgffyI/e29eDRNLpJl6wiVva2gB/DyvteRX2NToBZxzm4vAsD5XkpJClmnwsJu8tIY0tUkVVgWMtQvQiV7896FpYXWx1Vs8C1h/AOg73+c2XFxl7FhiUE6vxja6k49QvpvZTdpTRxiztDSJNo32joz5Cx+oC7lolz7A1iV2VlGTTfjQ57J9T+qXlzYiJ/OHEjOxlOaRQip3PNgN+lxeZVRVQgo7EVqIfhS5ImfrvM7h0p4nGQn+/SkyoniNrzhsKNvG6DtxN9DKx+NNtDJ7l9+hHM9Iv96KzPRGBadUHBhJfAFDgRFnqr2sF5BSsQ6Kep03XcOD61odPW1T7MkjW/g52vrDntOFEuPj8M6Zh623fkDnZM2yHi0s4g7EA2qM7ln6WqX61hl4CEiBkS/md3rqSYKwCIGqig2XGU6+xFEargKi/fud65c1sqZjWBdY6l92dpbzV5f3TiQMYDHyBxyArs8NZPkT+6OMYwRhkRlMGBgZ30WivQhNXVFDKag2GUY=
-#   file_glob: true
-#   #file: deploy/*
-#   file: 0.txt
-#   skip_cleanup: true
+deploy:
+  provider: releases
+  api_key:
+    # https://docs.travis-ci.com/user/deployment/releases/#authenticating-with-an-oauth-token
+    # https://github.com/settings/tokens/new => with repo
+    # brew install travis
+    # travis encrypt [accress_token]
+    secure: FhMWawzQxjFUL/T6ftUA6QrnXqWiP40soKirvCGzs+TnEJHa2aFhW0kYr7GIxSRIPu8JXVu1Tnl+Zp22Cj+oVab+yQ4FvjVYNkSt1AQV/qECKgKJhL6cP0x80rEnFtuSXzq41SpC7zcSoq570/d0np9UTKk5coWEsaopcK3NPkgffyI/e29eDRNLpJl6wiVva2gB/DyvteRX2NToBZxzm4vAsD5XkpJClmnwsJu8tIY0tUkVVgWMtQvQiV7896FpYXWx1Vs8C1h/AOg73+c2XFxl7FhiUE6vxja6k49QvpvZTdpTRxiztDSJNo32joz5Cx+oC7lolz7A1iV2VlGTTfjQ57J9T+qXlzYiJ/OHEjOxlOaRQip3PNgN+lxeZVRVQgo7EVqIfhS5ImfrvM7h0p4nGQn+/SkyoniNrzhsKNvG6DtxN9DKx+NNtDJ7l9+hHM9Iv96KzPRGBadUHBhJfAFDgRFnqr2sF5BSsQ6Kep03XcOD61odPW1T7MkjW/g52vrDntOFEuPj8M6Zh623fkDnZM2yHi0s4g7EA2qM7ln6WqX61hl4CEiBkS/md3rqSYKwCIGqig2XGU6+xFEargKi/fud65c1sqZjWBdY6l92dpbzV5f3TiQMYDHyBxyArs8NZPkT+6OMYwRhkRlMGBgZ30WivQhNXVFDKag2GUY=
+  file_glob: true
+  #file: deploy/*
+  file: 0.txt
+  skip_cleanup: true
 #   on:
 #     # tags: true
 #     condition: ${BUILD_TYPE} = Release && ${LIBPACKAGER_TYPE} == static_library
