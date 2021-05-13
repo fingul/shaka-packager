@@ -1,17 +1,26 @@
 language: cpp
 os:
 - linux
+#- osx
 env:
+#- BUILD_TYPE=Debug LIBPACKAGER_TYPE=static_library
+#- BUILD_TYPE=Debug LIBPACKAGER_TYPE=shared_library
 - BUILD_TYPE=Release LIBPACKAGER_TYPE=static_library
+#- BUILD_TYPE=Release LIBPACKAGER_TYPE=shared_library
 script:
 - echo "abc" > 0.txt
 before_deploy:
 - echo "abc" > 0.txt
+deploy:
+  provider: releases
+  file_glob: true
+  file: 0.txt
+  skip_cleanup: true
+  user: fingul
+  password:
+    secure: z2wDZoU7N7tAhhpCOIEYHhDmwx7uOeI/hbG+dslg97lCa46vknIcKYLqDwRxjWHpclVCJjRJX0lk7k4B5LIU7j7ultZAOXUwPUCqiPjLgan1u9MYvKr8p6LzlgJ9KDdUdJhOnIBBkZDV2yTBd7WtSKdyF6iBJiXOh85hLoHwEOwBs1AjMCo//5Y2AqvvlJJrjRD+ie37HMsMsDLxCaSI2ACzrhMoKxyBBN0EdrMFgWzrKFNli3xQhTh3ZwH/fq2ck8ZkDYeTe5cp9LCuSem9vRtcfDeaK9rbtEkm9GaZ+nJnvKm1af6jg94MEDZz9Oky7UzbQ1kpcRrgYgY/KFfbdLCWdyASQF5hNe2yGWlotaXgmFaHmn+h6fOgBVFEa7/y973doipc5Gx1pmFjeOBTAVcWo2ivPQZhUzwfq11lQhCwhmF5l6Vdss3RuwjbJS2btpLfYa5yB8hYLFGvJobhVHf3c5JqczWgyRSQv7e28AiqAPZ1kLVEFnh7q6niLyZaiMiYpd7NfqFMhPe4br32K+G/dpEBWjZLpzhktW1SEmql/a85LgeHj+5ImeX17YKQ+6HSVVLebk/A/ROZpdr91af90kPzq4+ZrtX6TPKA+JiLNou5p7rxtwZF5j6AaYBkjJTOA2cxR3p79f1M7BYIrQ8zlJpPt+u3JqmEsd9w4pE=
+
 branches:
   only:
   - master
   - "/^v\\d+\\./"
-deploy:
-  user: fingul
-  password:
-    secure: z2wDZoU7N7tAhhpCOIEYHhDmwx7uOeI/hbG+dslg97lCa46vknIcKYLqDwRxjWHpclVCJjRJX0lk7k4B5LIU7j7ultZAOXUwPUCqiPjLgan1u9MYvKr8p6LzlgJ9KDdUdJhOnIBBkZDV2yTBd7WtSKdyF6iBJiXOh85hLoHwEOwBs1AjMCo//5Y2AqvvlJJrjRD+ie37HMsMsDLxCaSI2ACzrhMoKxyBBN0EdrMFgWzrKFNli3xQhTh3ZwH/fq2ck8ZkDYeTe5cp9LCuSem9vRtcfDeaK9rbtEkm9GaZ+nJnvKm1af6jg94MEDZz9Oky7UzbQ1kpcRrgYgY/KFfbdLCWdyASQF5hNe2yGWlotaXgmFaHmn+h6fOgBVFEa7/y973doipc5Gx1pmFjeOBTAVcWo2ivPQZhUzwfq11lQhCwhmF5l6Vdss3RuwjbJS2btpLfYa5yB8hYLFGvJobhVHf3c5JqczWgyRSQv7e28AiqAPZ1kLVEFnh7q6niLyZaiMiYpd7NfqFMhPe4br32K+G/dpEBWjZLpzhktW1SEmql/a85LgeHj+5ImeX17YKQ+6HSVVLebk/A/ROZpdr91af90kPzq4+ZrtX6TPKA+JiLNou5p7rxtwZF5j6AaYBkjJTOA2cxR3p79f1M7BYIrQ8zlJpPt+u3JqmEsd9w4pE=
