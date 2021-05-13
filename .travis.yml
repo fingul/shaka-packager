@@ -1,25 +1,17 @@
 language: cpp
 os:
 - linux
-#- osx
 env:
-#- BUILD_TYPE=Debug LIBPACKAGER_TYPE=static_library
-#- BUILD_TYPE=Debug LIBPACKAGER_TYPE=shared_library
 - BUILD_TYPE=Release LIBPACKAGER_TYPE=static_library
-#- BUILD_TYPE=Release LIBPACKAGER_TYPE=shared_library
 script:
 - echo "abc" > 0.txt
 before_deploy:
 - echo "abc" > 0.txt
-deploy:
-  provider: releases
-  file_glob: true
-  file: 0.txt
-  skip_cleanup: true
-  user: fingul
-  password:
-    secure: qOm0JaNijoDsZJ+lVH3e7zQND/cCIkbg4pEHd8rb2lV9XnopEW3iMxdYGHWrkwckr00jguxPbsSWuRAnO/5EPsPT3X012/RFtc6cj1SHK2G49AmDpkuYMiS3rgrsx5cEDEop7xfSQgJ88t157x/6KcQqYmE/PRQNbUjd+NnEtNDAJGnfYaPjM7sM7YtCmARmX3X+JdaGiJHKqIxm7VSU5TDjb2+FShE/webfug1tZfZnGI59By2rN7nb2rfip4hX8/RwqUrfYOVhs1zYL5OsrE1M6LiDK68zMrmtr5x6dKVWhkjOQjpaRYVteJV0VYoOMY2WGcEfelJDPD2xcyHvpMEhtZXTvBCj05wZnJVwCb9hulYV+4BSYIZ3246SNiW60VD5PpXR7UzA1ZqwpkttQSuaCZ9a7QcknOAijhm9afe6T4bzv1c08HCabikVr1W6k+hLf2V0bnVHAcZp7ADq9HIgJSqZo0wYo7MmfoE67L316Pju16Zj3DyJRHUQ7VXcR5CSYnOScUv7pjSIX7oqCk/HSaB5RBHCPDbvztHUV3Wy7Dqu/6o88OKzsOGGkSOy/sx1Q6yTroKWwuEdPCkAd068Pkq6BqTJWz/vglCWEzxCMXIVYD8dEQLEAa6Vb0qEGFWJ9ecrwmNhbSU02yvLA7R5J4NJnZX+GJGCjIEHXi0=
 branches:
   only:
   - master
   - "/^v\\d+\\./"
+deploy:
+  user: fingul
+  password:
+    secure: z2wDZoU7N7tAhhpCOIEYHhDmwx7uOeI/hbG+dslg97lCa46vknIcKYLqDwRxjWHpclVCJjRJX0lk7k4B5LIU7j7ultZAOXUwPUCqiPjLgan1u9MYvKr8p6LzlgJ9KDdUdJhOnIBBkZDV2yTBd7WtSKdyF6iBJiXOh85hLoHwEOwBs1AjMCo//5Y2AqvvlJJrjRD+ie37HMsMsDLxCaSI2ACzrhMoKxyBBN0EdrMFgWzrKFNli3xQhTh3ZwH/fq2ck8ZkDYeTe5cp9LCuSem9vRtcfDeaK9rbtEkm9GaZ+nJnvKm1af6jg94MEDZz9Oky7UzbQ1kpcRrgYgY/KFfbdLCWdyASQF5hNe2yGWlotaXgmFaHmn+h6fOgBVFEa7/y973doipc5Gx1pmFjeOBTAVcWo2ivPQZhUzwfq11lQhCwhmF5l6Vdss3RuwjbJS2btpLfYa5yB8hYLFGvJobhVHf3c5JqczWgyRSQv7e28AiqAPZ1kLVEFnh7q6niLyZaiMiYpd7NfqFMhPe4br32K+G/dpEBWjZLpzhktW1SEmql/a85LgeHj+5ImeX17YKQ+6HSVVLebk/A/ROZpdr91af90kPzq4+ZrtX6TPKA+JiLNou5p7rxtwZF5j6AaYBkjJTOA2cxR3p79f1M7BYIrQ8zlJpPt+u3JqmEsd9w4pE=
