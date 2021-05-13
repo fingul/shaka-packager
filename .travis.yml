@@ -36,6 +36,7 @@ env:
 #   - out/${BUILD_TYPE}/packager_test.py -v --libpackager_type=${LIBPACKAGER_TYPE}
 
 script:
+
     - echo "abc" > 0.txt
 
 before_deploy:
