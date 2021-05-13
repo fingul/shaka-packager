@@ -1,12 +1,12 @@
 language: cpp
 os:
 - linux
-- osx
+#- osx
 env:
-- BUILD_TYPE=Debug LIBPACKAGER_TYPE=static_library
-- BUILD_TYPE=Debug LIBPACKAGER_TYPE=shared_library
+#- BUILD_TYPE=Debug LIBPACKAGER_TYPE=static_library
+#- BUILD_TYPE=Debug LIBPACKAGER_TYPE=shared_library
 - BUILD_TYPE=Release LIBPACKAGER_TYPE=static_library
-- BUILD_TYPE=Release LIBPACKAGER_TYPE=shared_library
+#- BUILD_TYPE=Release LIBPACKAGER_TYPE=shared_library
 script:
 - echo "abc" > 0.txt
 before_deploy:
@@ -16,7 +16,7 @@ deploy:
   file_glob: true
   file: 0.txt
   skip_cleanup: true
-  user: fingul@gmail.com
+  user: fingul
   password:
     secure: qOm0JaNijoDsZJ+lVH3e7zQND/cCIkbg4pEHd8rb2lV9XnopEW3iMxdYGHWrkwckr00jguxPbsSWuRAnO/5EPsPT3X012/RFtc6cj1SHK2G49AmDpkuYMiS3rgrsx5cEDEop7xfSQgJ88t157x/6KcQqYmE/PRQNbUjd+NnEtNDAJGnfYaPjM7sM7YtCmARmX3X+JdaGiJHKqIxm7VSU5TDjb2+FShE/webfug1tZfZnGI59By2rN7nb2rfip4hX8/RwqUrfYOVhs1zYL5OsrE1M6LiDK68zMrmtr5x6dKVWhkjOQjpaRYVteJV0VYoOMY2WGcEfelJDPD2xcyHvpMEhtZXTvBCj05wZnJVwCb9hulYV+4BSYIZ3246SNiW60VD5PpXR7UzA1ZqwpkttQSuaCZ9a7QcknOAijhm9afe6T4bzv1c08HCabikVr1W6k+hLf2V0bnVHAcZp7ADq9HIgJSqZo0wYo7MmfoE67L316Pju16Zj3DyJRHUQ7VXcR5CSYnOScUv7pjSIX7oqCk/HSaB5RBHCPDbvztHUV3Wy7Dqu/6o88OKzsOGGkSOy/sx1Q6yTroKWwuEdPCkAd068Pkq6BqTJWz/vglCWEzxCMXIVYD8dEQLEAa6Vb0qEGFWJ9ecrwmNhbSU02yvLA7R5J4NJnZX+GJGCjIEHXi0=
 branches:
