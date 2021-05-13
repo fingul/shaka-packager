@@ -16,7 +16,8 @@ deploy:
   file_glob: true
   file: 0.txt
   skip_cleanup: true
-  api_key: "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"
+  user: fingul
+  api_key: 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
 
 branches:
   only:
